@@ -64,21 +64,4 @@ void main() {
         strcpy(user.nume, token);
         //printf("%s\n", user.nume);
 
-        token = strtok(NULL, separator);
-        user.varsta = (unsigned int)atoi(token);
-
-        token = strtok(NULL, separator);
-        strcpy(user.deschis_la, token);
-
-        token = strtok(NULL, separator);
-        user.nrTickete = atoi(token);
-
-        user.tickets = (int*)malloc(sizeof(int) * user.nrTickete);
-        for (int i = 0; i < user.nrTickete; i++) {
-            token = strtok(NULL, separator);
-            user.tickets[i] = atoi(token);
-        }
-        list = inserare_sfarsit(list, user);
-    }
-    afisareListaSimpla(list);
 }
