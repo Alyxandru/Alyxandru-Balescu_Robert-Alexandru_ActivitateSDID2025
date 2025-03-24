@@ -1,0 +1,7 @@
+Festival Jazz;12.07.2024;confirmat;1500;
+Expozitie Pictura;20.08.2024;anulat;800;
+Conferinta Tech M.A.I.;05.09.2024;confirmat;2000;
+Festival Jzza;15.07.2024;anulat;1700;
+Maraton Caritabil;15.06.2024;finalizat;1200;
+Targ de Carte;30.04.2024;in desfasurare;1100;
+Conferinta Tech I.M.A.;10.09.2024;confirmat;2200;
