@@ -9,12 +9,23 @@
 
 typedef struct Eveniment Eveniment;
 typedef struct NodH NodH;
+typedef struct NodLD NodLD;
+typedef struct ListaD ListaD;
 
 struct Eveniment {
 	char* nume;
 	char data[11];
 	char* status;
 	int nrMaximPersoane;
+};
+struct NodLD {
+	Eveniment eveniment;
+	NodLD* next;
+	NodLD* previos;
+};
+struct ListaD {
+	NodLD* primul;
+	NodLD* ultimul;
 };
 struct NodH {
 	char* cheie;//nume
@@ -94,6 +105,72 @@ void citireHtableDinFisier(char* numeFisier, NodH** nodH) {
 	}
 	fclose(f);
 }
+
+void cautareEveniment(NodH** nodH, char* nume) {
+	int poz = functieHash(nume);
+	NodH* temp = nodH[poz];
+	while (temp != NULL) {
+		if (strcmp(temp->cheie, nume) == 0) {
+			printf("\nEvenimentul %s are loc pe data de %s si are statusul %s. Numarul maxim de persoane este %d.\n", temp->eveniment.nume, temp->eveniment.data, temp->eveniment.status, temp->eveniment.nrMaximPersoane);
+			return;
+		}
+		temp = temp->next;
+	}
+	printf("\nEveniment nu sa gasit");
+	return;
+}
+void modificareNrMax(NodH** nodH, char* nume, int modificare) {
+	int poz = functieHash(nume);
+	NodH* temp = nodH[poz];
+	while (temp != NULL) {
+		if (strcmp(temp->cheie, nume) == 0) {
+			temp->eveniment.nrMaximPersoane = modificare;
+			return;
+		}
+		temp = temp->next;
+	}
+
+}
+ListaD inserareLD(ListaD lista, Eveniment eveniment) {
+	NodLD* nou = (NodLD*)malloc(sizeof(NodLD));
+	nou->eveniment = eveniment;
+	nou->next = NULL;
+	nou->previos = lista.ultimul;
+
+	if (lista.primul == NULL) {
+		lista.primul = lista.ultimul = nou;
+		return lista;
+	}
+	lista.ultimul->next = nou;
+	return lista;
+}
+
+ListaD listaPTStatusAnulat(NodH** nodH) {
+	ListaD lista; 
+	lista.primul = lista.ultimul = NULL;
+
+	for (int i = 0; i < DIM_HTABLE; i++) {
+		if (nodH[i] != NULL) {
+			NodH* temp = nodH[i];
+			while (temp != NULL) {
+				if (strcmp(temp->eveniment.status, "anulat") == 0) {
+					lista = inserareLD(lista, temp->eveniment);
+				}
+				temp = temp->next;
+			}
+		}
+	}
+	return lista;
+}
+
+void afisareLD(ListaD lista) {
+	NodLD* temp = lista.primul;
+	while (temp != NULL) {
+		printf("\nEvenimentul %s are loc pe data de %s si are statusul %s. Numarul maxim de persoane este %d.\n", temp->eveniment.nume, temp->eveniment.data, temp->eveniment.status, temp->eveniment.nrMaximPersoane);
+		temp = temp->next;
+	}
+}
+
 int main() {
 	NodH** nodH = (NodH**)malloc(sizeof(NodH*) * DIM_HTABLE);
 	for (int i = 0; i < DIM_HTABLE; i++) {
@@ -102,4 +179,12 @@ int main() {
 	citireHtableDinFisier("Evenimente.txt", nodH);
 	printf("%p\n", nodH);
 	afisare(nodH);
+	cautareEveniment(nodH, "Festival Jzza"); 
+	
+	modificareNrMax(nodH, "Festival Jzza", 600);
+	afisare(nodH);
+	printf("\n\n");
+	ListaD lista = listaPTStatusAnulat(nodH);
+	afisareLD(lista);
+	
 }
