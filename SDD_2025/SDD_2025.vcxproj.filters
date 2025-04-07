@@ -24,9 +24,13 @@
     <ClCompile Include="RecapitulareHash.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArboreBinar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Accounts.txt" />
     <Text Include="Evenimente.txt" />
+    <Text Include="Events.txt" />
   </ItemGroup>
 </Project>

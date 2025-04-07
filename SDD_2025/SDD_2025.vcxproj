@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArboreBinar.c" />
     <ClCompile Include="RecapitulareHash.c" />
     <ClCompile Include="Sourse01.c" />
     <ClCompile Include="TabelDispersie_LinearProbing.c" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <Text Include="Accounts.txt" />
     <Text Include="Evenimente.txt" />
+    <Text Include="Events.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
