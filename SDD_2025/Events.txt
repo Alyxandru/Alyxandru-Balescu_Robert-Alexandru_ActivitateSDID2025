@@ -2,4 +2,5 @@
 234;Expozitie Pictura;20.08.2024;800;
 35;Conferinta Tech M.A.I.;05.09.2024;2000;
 56;Maraton Caritabil;15.06.2024;1200;
+46;Maraton Caritabil;15.06.2024;1200;
 325;Targ de Carte;30.04.2024;1100;

@@ -115,16 +115,79 @@ void cautareEveniment(NodABC* rad, int id) {
     }
 }
 
+//Modificare nr maxim de persoane
+NodABC* modificareNrMaximPers(NodABC* rad, int id, int nrMaximPersoane) {
+    if (rad) {
+        if (id < rad->eveniment.idEveniment) {
+            rad->left = modificareNrMaximPers(rad->left, id, nrMaximPersoane);
+        }
+        else if (id > rad->eveniment.idEveniment) {
+            rad->right = modificareNrMaximPers(rad->right, id, nrMaximPersoane);
+        }
+        else {
+            rad->eveniment.nrMaximPersoane = nrMaximPersoane;
+        }
+    }
+
+    return rad;
+}
+
+
+NodABC* stergereRadacina(NodABC* rad) {
+    NodABC* temp = rad;
+    if (temp->left != NULL) {
+        temp = temp->left;
+        while (temp->right != NULL) {
+            temp = temp->right;
+        }
+        temp->right = rad->right;
+        temp = rad->left;
+    }
+    else if (temp->right != NULL) {
+        temp = temp->right;
+    }
+    else {
+        temp = NULL;
+    }
+    free(rad->eveniment.nume);
+    free(rad);
+    return temp;
+}
+NodABC* stergereNod(NodABC* rad, int id) {
+    if (rad) {
+        if (id < rad->eveniment.idEveniment) {
+            rad->left = stergereNod(rad->left, id);
+        }
+        else if (id > rad->eveniment.idEveniment) {
+            rad->right = stergereNod(rad->right, id);
+        }
+        else {
+            rad = stergereRadacina(rad);
+        }
+    }
+}
 
 void main() {
     NodABC* rad = NULL;
     rad = citireFisierABC(rad, "Events.txt");
 
-
+    printf("\nPre: \n");
     afisarePreordine(rad); // Radacina -> Stanga -> Dreapta
+    printf("\nIn: \n");
     afisareInordine(rad); //Stanga -> Radacina -> Dreapta
+    printf("\nPost: \n");
     afisarePostordine(rad); // Stanga -> Dreapta -> Radacina
 
     printf("\nCautare: \n");
     cautareEveniment(rad, 35);
+
+
+    printf("\nCeva: \n");
+    rad = stergereRadacina(rad);
+    printf("\nPre: \n");
+    afisarePreordine(rad); // Radacina -> Stanga -> Dreapta
+    printf("\nIn: \n");
+    afisareInordine(rad); //Stanga -> Radacina -> Dreapta
+    printf("\nPost: \n");
+    afisarePostordine(rad); // Stanga -> Dreapta -> Radacina
 }
