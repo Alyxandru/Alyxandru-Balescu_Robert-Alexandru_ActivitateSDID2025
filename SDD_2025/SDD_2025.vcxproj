@@ -127,7 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arbore.c" />
     <ClCompile Include="ArboreBinar.c" />
+    <ClCompile Include="ListeREC.c" />
     <ClCompile Include="Recapitulare.c" />
     <ClCompile Include="Recapitulare2.c" />
     <ClCompile Include="Recapitulare3.c" />
@@ -137,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Accounts.txt" />
+    <Text Include="Automobile.txt" />
     <Text Include="Evenimente.txt" />
     <Text Include="EvenimentRecap.txt" />
     <Text Include="Events.txt" />

@@ -1,0 +1,4 @@
+Car;4;
+Bus;6;
+Bike;2;
+Truck;8;
